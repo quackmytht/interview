@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tht.mapper.StaffMapper">
+
+    <resultMap id="BaseResultMap" type="com.tht.entity.Staff">
+            <id property="id" column="id" jdbcType="INTEGER"/>
+            <result property="empName" column="emp_name" jdbcType="VARCHAR"/>
+            <result property="sex" column="sex" jdbcType="VARCHAR"/>
+            <result property="age" column="age" jdbcType="INTEGER"/>
+            <result property="deptName" column="dept_name" jdbcType="VARCHAR"/>
+            <result property="empDegreeName" column="emp_degree_name" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <select id="selectStaffPage" parameterType="com.tht.entity.Staff" resultMap="BaseResultMap">
+        select id, emp_name, sex, age, dept_name, emp_degree_name
+        from staff
+        <where>
+            <if test="staff.id != null">
+                AND id = #{staff.id}
+            </if>
+            <if test="staff.empName != null and staff.empName != ''">
+                AND emp_name LIKE CONCAT('%',#{staff.empName},'%')
+            </if>
+            <if test="staff.sex != null and staff.sex != ''">
+                AND sex = #{staff.sex}
+            </if>
+            <if test="staff.age != null">
+                AND age &gt;= #{staff.age}
+            </if>
+            <if test="staff.deptName != null and staff.deptName != ''">
+                AND dept_name = #{staff.deptName}
+            </if>
+            <if test="staff.empDegreeName != null and staff.empDegreeName != ''">
+                AND emp_degree_name = #{staff.empDegreeName}
+            </if>
+        </where>
+    </select>
+</mapper>
