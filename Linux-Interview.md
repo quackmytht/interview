@@ -35,7 +35,7 @@ echo "搜索完成，结果保存在 $result_file 中。"
 <kbd>./search.sh [文件路径] [搜索内容] [结果文件]</kbd>
 
 ## 第二题
-
+2). 编写一个shell: 显示当前硬盘使用情况，内存使用情况，CPU使用情况
 ```shell
 #!/bin/bash
 
